@@ -1,0 +1,71 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+ion-content.background-content {
+    --background: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay {
+    background: url('../../../../assets/fondo_coro.png') no-repeat top center / cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; // Ensure the background stays behind the content
+    filter: brightness(50%); // Darken the background image
+}
+
+.search-bar-container {
+    position: relative;
+    z-index: 1; // Ensure the search bar is above the background
+    padding: 10px;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1; // Ensure the content is above the background
+    flex: 1;
+    overflow-y: auto; // Enable scrolling
+    padding: 0 10px;
+}
+
+.song-list {
+    margin-bottom: 10px;
+}
+
+.song-item {
+    background: rgba(0, 0, 0, 0.05); // Semi-transparent background to improve readability
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.song-label {
+    color: white; // Ensure the text is readable
+    font-size: 18px;
+}
+
+.icon-musical-note::before {
+    content: "\1F3B5";
+    color: white; // Set the icon color to white
+    margin-right: 8px;
+}

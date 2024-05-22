@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'coroAppMobileV2',
+  appId: 'com.coroapp.mariscaldev',
+  appName: 'CoroApp',
   webDir: 'www'
 };
 

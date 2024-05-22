@@ -1,0 +1,24 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="content">
+      <!-- IMAGEN -->
+      <ion-img
+        class="img"
+        src="../../../../assets/coro.jpg"
+        alt="CoroApp"></ion-img>
+      <h1>Bienvenido a<br /><span>CoroApp</span></h1>
+      <ion-icon name="arrow-down"></ion-icon>
+      <!-- BOTONES -->
+      <div class="center-content">
+        <ion-button color="primary" shape="round" (click)="goToLogin()">
+          <ion-icon slot="start" name="person"></ion-icon> Administrador
+          <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        </ion-button><br>
+        <ion-button color="primary" shape="round" (click)="goToHome()">
+          <ion-icon slot="start" name="man"></ion-icon> Miembro del Coro
+          <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

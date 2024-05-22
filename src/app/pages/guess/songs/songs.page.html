@@ -1,0 +1,21 @@
+<app-nav-bar></app-nav-bar>
+<div class="search-bar-container">
+  <input
+    type="text"
+    class="search-bar"
+    placeholder="Buscar canción"
+    [(ngModel)]="searchTerm"
+    (input)="filterSongs()" />
+</div>
+<ion-content class="background-content">
+  <div class="overlay"></div>
+  <div class="content-wrapper">
+    <div class="song-list" *ngFor="let song of filteredSongs">
+      <div class="song-item" (click)="openSongPage(song.id)">
+        <span class="song-label">
+          <b class="fas fa-music icon-musical-note"></b> {{ song.name }}
+        </span>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>{{ list?.name || '' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToBack()"><ion-icon slot="icon-only"
+          name="arrow-back-circle-outline"></ion-icon></ion-button>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="contenido">
+    <ng-container *ngFor="let section of sections">
+      <ion-item
+        (click)="section.open = !section.open"
+        color="light"
+        lines="full">
+        <ion-label>{{ section.name }}</ion-label>
+        <ion-icon
+          slot="end"
+          name="chevron-down-outline"
+          *ngIf="!section.open"></ion-icon>
+        <ion-icon
+          slot="end"
+          name="chevron-up-outline"
+          *ngIf="section.open"></ion-icon>
+      </ion-item>
+      <div *ngIf="section.open">
+        <ion-list lines="none">
+          <ion-item
+            *ngFor="let song of section.songs"
+            (click)="openSongPage(song.id)">
+            <ion-label>{{ song.name }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ng-container>
+  </div>
+</ion-content>

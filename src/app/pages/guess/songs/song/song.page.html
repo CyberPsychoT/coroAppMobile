@@ -1,0 +1,133 @@
+<app-nav-bar></app-nav-bar>
+<ion-content>
+  <div class="contenido">
+    <ion-list lines="none" class="list-visualizer">
+      <!-- Introduccion -->
+      <ion-item
+        color="light"
+        button
+        (click)="openSections.introduction = !openSections.introduction">
+        <ion-label>Introducción</ion-label>
+        <ion-icon
+          slot="end"
+          name="chevron-down-outline"
+          *ngIf="!openSections.introduction"></ion-icon>
+        <ion-icon
+          slot="end"
+          name="chevron-up-outline"
+          *ngIf="openSections.introduction"></ion-icon>
+      </ion-item>
+      <div *ngIf="openSections.introduction">
+        <p style="white-space: pre-wrap">{{ song?.introduction }}</p>
+      </div>
+      <!-- Letra 1 -->
+      <ion-item
+        color="light"
+        button
+        (click)="openSections.letter1 = !openSections.letter1">
+        <ion-label>Letra y acordes </ion-label>
+        <ion-icon
+          slot="end"
+          name="chevron-down-outline"
+          *ngIf="!openSections.letter1"></ion-icon>
+        <ion-icon
+          slot="end"
+          name="chevron-up-outline"
+          *ngIf="openSections.letter1"></ion-icon>
+      </ion-item>
+      <div *ngIf="openSections.letter1">
+        <p style="white-space: pre-wrap">{{ song?.letter1 }}</p>
+      </div>
+      <!-- Interludio -->
+      <ion-item
+        color="light"
+        button
+        (click)="openSections.interlude = !openSections.interlude">
+        <ion-label>Interludio</ion-label>
+        <ion-icon
+          slot="end"
+          name="chevron-down-outline"
+          *ngIf="!openSections.interlude"></ion-icon>
+        <ion-icon
+          slot="end"
+          name="chevron-up-outline"
+          *ngIf="openSections.interlude"></ion-icon>
+      </ion-item>
+      <div *ngIf="openSections.interlude">
+        <p style="white-space: pre-wrap">{{ song?.interlude }}</p>
+      </div>
+      <!-- Letra 2 -->
+      <ion-item
+        color="light"
+        button
+        (click)="openSections.letter2 = !openSections.letter2">
+        <ion-label>Letra y acordes</ion-label>
+        <ion-icon
+          slot="end"
+          name="chevron-down-outline"
+          *ngIf="!openSections.letter2"></ion-icon>
+        <ion-icon
+          slot="end"
+          name="chevron-up-outline"
+          *ngIf="openSections.letter2"></ion-icon>
+      </ion-item>
+      <div *ngIf="openSections.letter2">
+        <p style="white-space: pre-wrap">{{ song?.letter2 }}</p>
+      </div>
+      <!-- Final -->
+      <ion-item
+        color="light"
+        button
+        (click)="openSections.end = !openSections.end">
+        <ion-label>Final</ion-label>
+        <ion-icon
+          slot="end"
+          name="chevron-down-outline"
+          *ngIf="!openSections.end"></ion-icon>
+        <ion-icon
+          slot="end"
+          name="chevron-up-outline"
+          *ngIf="openSections.end"></ion-icon>
+      </ion-item>
+      <div *ngIf="openSections.end">
+        <p style="white-space: pre-wrap">{{ song?.end }}</p>
+      </div>
+      <!-- Etiqueta -->
+      <ion-item
+        color="light"
+        button
+        (click)="openSections.label = !openSections.label">
+        <ion-label>Etiqueta</ion-label>
+        <ion-icon
+          slot="end"
+          name="chevron-down-outline"
+          *ngIf="!openSections.label"></ion-icon>
+        <ion-icon
+          slot="end"
+          name="chevron-up-outline"
+          *ngIf="openSections.label"></ion-icon>
+      </ion-item>
+      <div *ngIf="openSections.label">
+        <p style="white-space: pre-wrap">{{ song?.label }}</p>
+      </div>
+      <!-- Video -->
+      <ion-item
+        color="light"
+        button
+        (click)="openSections.video = !openSections.video">
+        <ion-label>Vídeo</ion-label>
+        <ion-icon
+          slot="end"
+          name="chevron-down-outline"
+          *ngIf="!openSections.video"></ion-icon>
+        <ion-icon
+          slot="end"
+          name="chevron-up-outline"
+          *ngIf="openSections.video"></ion-icon>
+      </ion-item>
+      <div *ngIf="openSections.video">
+        <p style="white-space: pre-wrap" class="video"></p>
+      </div>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">CoroApp</string>
+    <string name="title_activity_main">CoroApp</string>
+    <string name="package_name">com.coroapp.mariscaldev</string>
+    <string name="custom_url_scheme">com.coroapp.mariscaldev</string>
+</resources>

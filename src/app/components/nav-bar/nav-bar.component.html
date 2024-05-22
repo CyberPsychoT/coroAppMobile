@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar [color]="color">
+    <ion-title>{{ title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToBack()"><ion-icon slot="icon-only"
+          name="arrow-back-circle-outline"></ion-icon></ion-button>
+      <!-- <ion-button
+        *ngIf="authService.isAuthenticated$ | async"
+        (click)="goToProfile()"
+      >
+        <ion-icon slot="icon-only" name="person"></ion-icon>
+      </ion-button> -->
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
