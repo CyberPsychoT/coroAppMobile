@@ -1,0 +1,7 @@
+{
+  "name": "coroAppMobileV2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
