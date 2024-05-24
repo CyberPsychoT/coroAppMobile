@@ -1,8 +1,53 @@
 <app-nav-bar></app-nav-bar>
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">settings</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-segment [(ngModel)]="selectedSegment" mode="ios">
+    <ion-segment-button value="celular">
+        Celular
+    </ion-segment-button>
+    <ion-segment-button value="tablet">
+        Tablet
+    </ion-segment-button>
+</ion-segment>
+
+<ion-content>
+    <ng-container *ngIf="selectedSegment === 'celular'">
+        <ion-list lines="none" mode="ios">
+            <ion-item>
+                <ion-toggle
+                    justify="space-between"
+                    [(ngModel)]="largeTextEnabled"
+                    (ionChange)="onLargeTextToggleChange()">
+                    Aumentar texto de canción
+                </ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-toggle
+                    justify="space-between"
+                    [(ngModel)]="largeListTextEnabled"
+                    (ionChange)="onLargeListTextToggleChange()">
+                    Aumentar texto de lista
+                </ion-toggle>
+            </ion-item>
+        </ion-list>
+    </ng-container>
+
+    <ng-container *ngIf="selectedSegment === 'tablet'">
+        <ion-list lines="none" mode="ios">
+            <ion-item>
+                <ion-toggle
+                    justify="space-between"
+                    [(ngModel)]="largeTextTabletEnabled"
+                    (ionChange)="onLargeTextTabletToggleChange()">
+                    Aumentar texto de canción (Tablet)
+                </ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-toggle
+                    justify="space-between"
+                    [(ngModel)]="largeListTextTabletEnabled"
+                    (ionChange)="onLargeListTextTabletToggleChange()">
+                    Aumentar texto de lista (Tablet)
+                </ion-toggle>
+            </ion-item>
+        </ion-list>
+    </ng-container>
 </ion-content>

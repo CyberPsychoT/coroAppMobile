@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs';
 import { MenuController, ToastController } from '@ionic/angular';
 import { AuthService } from './services/auth.service';
+import { ConfigService } from './services/config.service';
 
 @Component({
   selector: 'app-root',
@@ -25,8 +26,35 @@ export class AppComponent {
     private router: Router,
     private menu: MenuController,
     private toastController: ToastController,
-    public authService: AuthService
-  ) {}
+    public authService: AuthService,
+    private configService: ConfigService,
+  ) {
+    this.applyStoredConfigurations();
+  }
+
+  //Aplicacion configuración
+  //Texto grande
+  private applyStoredConfigurations() {
+    // Apply large text configuration for Celular
+    if (this.configService.isLargeTextEnabled()) {
+      document.body.classList.add('large-song-text');
+    }
+
+    // Apply large list text configuration for Celular
+    if (this.configService.isLargeListTextEnabled()) {
+      document.body.classList.add('large-list-text');
+    }
+
+    // Apply large text configuration for Tablet
+    if (this.configService.isLargeTextTabletEnabled()) {
+      document.body.classList.add('large-song-text-tablet');
+    }
+
+    // Apply large list text configuration for Tablet
+    if (this.configService.isLargeListTextTabletEnabled()) {
+      document.body.classList.add('large-list-text-tablet');
+    }
+  }
 
   canActivate(
     next: ActivatedRouteSnapshot,

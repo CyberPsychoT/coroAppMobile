@@ -15,7 +15,8 @@
       <ion-item
         (click)="section.open = !section.open"
         color="light"
-        lines="full">
+        lines="full"
+        class="list-header">
         <ion-label>{{ section.name }}</ion-label>
         <ion-icon
           slot="end"
@@ -29,6 +30,7 @@
       <div *ngIf="section.open">
         <ion-list lines="none">
           <ion-item
+            class="list-item"
             *ngFor="let song of section.songs"
             (click)="openSongPage(song.id)">
             <ion-label>{{ song.name }}</ion-label>

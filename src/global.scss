@@ -35,3 +35,50 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 @import "@ionic/angular/css/palettes/dark.class.css";
 /* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+/* Mis estilos para configuración */
+/* Celular */
+/* Letra de song*/
+body.large-song-text {
+    .song-header {
+        font-size: 1.3em;
+    }
+
+    .song-item {
+        font-size: 1.2em;
+    }
+}
+
+/*Contenido de lista*/
+body.large-list-text {
+    .list-header {
+        font-size: 1.3em;
+    }
+
+    .list-item {
+        font-size: 1.2em;
+    }
+}
+
+/* TABLET */
+/* Letra de song */
+body.large-song-text-tablet {
+    .song-header {
+        font-size: 1.8em;
+    }
+
+    .song-item {
+        font-size: 1.7em;
+    }
+}
+
+/*Contenido de lista*/
+body.large-list-text-tablet {
+    .list-header {
+        font-size: 1.8em;
+    }
+
+    .list-item {
+        font-size: 1.7em;
+    }
+}
