@@ -36,23 +36,43 @@ export class AppComponent {
   //Texto grande
   private applyStoredConfigurations() {
     // Apply large text configuration for Celular
-    if (this.configService.isLargeTextEnabled()) {
-      document.body.classList.add('large-song-text');
+    if (this.configService.isLargeSongTextEnabled1()) {
+      document.body.classList.add('large-song-text-1');
     }
 
     // Apply large list text configuration for Celular
-    if (this.configService.isLargeListTextEnabled()) {
-      document.body.classList.add('large-list-text');
+    if (this.configService.isLargeListTextEnabled1()) {
+      document.body.classList.add('large-list-text-1');
+    }
+
+    // Apply large text configuration for Celular (2)
+    if (this.configService.isLargeSongTextEnabled2()) {
+      document.body.classList.add('large-song-text-2');
+    }
+
+    // Apply large list text configuration for Celular (2)
+    if (this.configService.isLargeListTextEnabled2()) {
+      document.body.classList.add('large-list-text-2');
     }
 
     // Apply large text configuration for Tablet
-    if (this.configService.isLargeTextTabletEnabled()) {
-      document.body.classList.add('large-song-text-tablet');
+    if (this.configService.isLargeSongTextTabletEnabled1()) {
+      document.body.classList.add('large-song-text-tablet-1');
     }
 
     // Apply large list text configuration for Tablet
-    if (this.configService.isLargeListTextTabletEnabled()) {
-      document.body.classList.add('large-list-text-tablet');
+    if (this.configService.isLargeListTextTabletEnabled1()) {
+      document.body.classList.add('large-list-text-tablet-1');
+    }
+
+    // Apply large text configuration for Tablet (2)
+    if (this.configService.isLargeSongTextTabletEnabled2()) {
+      document.body.classList.add('large-song-text-tablet-2');
+    }
+
+    // Apply large list text configuration for Tablet (2)
+    if (this.configService.isLargeListTextTabletEnabled2()) {
+      document.body.classList.add('large-list-text-tablet-2');
     }
   }
 

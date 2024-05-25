@@ -14,17 +14,33 @@
             <ion-item>
                 <ion-toggle
                     justify="space-between"
-                    [(ngModel)]="largeTextEnabled"
-                    (ionChange)="onLargeTextToggleChange()">
-                    Aumentar texto de canción
+                    [(ngModel)]="largeSongTextEnabled1"
+                    (ionChange)="onLargeSongTextToggleChange1()">
+                    Aumentar texto de canción X1.5
                 </ion-toggle>
             </ion-item>
             <ion-item>
                 <ion-toggle
                     justify="space-between"
-                    [(ngModel)]="largeListTextEnabled"
-                    (ionChange)="onLargeListTextToggleChange()">
-                    Aumentar texto de lista
+                    [(ngModel)]="largeListTextEnabled1"
+                    (ionChange)="onLargeListTextToggleChange1()">
+                    Aumentar texto de lista X1.5
+                </ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-toggle
+                    justify="space-between"
+                    [(ngModel)]="largeSongTextEnabled2"
+                    (ionChange)="onLargeSongTextToggleChange2()">
+                    Aumentar texto de canción X2.0
+                </ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-toggle
+                    justify="space-between"
+                    [(ngModel)]="largeListTextEnabled2"
+                    (ionChange)="onLargeListTextToggleChange2()">
+                    Aumentar texto de lista X2.0
                 </ion-toggle>
             </ion-item>
         </ion-list>
@@ -35,17 +51,33 @@
             <ion-item>
                 <ion-toggle
                     justify="space-between"
-                    [(ngModel)]="largeTextTabletEnabled"
-                    (ionChange)="onLargeTextTabletToggleChange()">
-                    Aumentar texto de canción (Tablet)
+                    [(ngModel)]="largeSongTextTabletEnabled1"
+                    (ionChange)="onLargeSongTextTabletToggleChange1()">
+                    Aumentar texto de canción X1.5
                 </ion-toggle>
             </ion-item>
             <ion-item>
                 <ion-toggle
                     justify="space-between"
-                    [(ngModel)]="largeListTextTabletEnabled"
-                    (ionChange)="onLargeListTextTabletToggleChange()">
-                    Aumentar texto de lista (Tablet)
+                    [(ngModel)]="largeListTextTabletEnabled1"
+                    (ionChange)="onLargeListTextTabletToggleChange1()">
+                    Aumentar texto de lista X1.5
+                </ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-toggle
+                    justify="space-between"
+                    [(ngModel)]="largeSongTextTabletEnabled2"
+                    (ionChange)="onLargeSongTextTabletToggleChange2()">
+                    Aumentar texto de canción X2.0
+                </ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-toggle
+                    justify="space-between"
+                    [(ngModel)]="largeListTextTabletEnabled2"
+                    (ionChange)="onLargeListTextTabletToggleChange2()">
+                    Aumentar texto de lista X2.0
                 </ion-toggle>
             </ion-item>
         </ion-list>

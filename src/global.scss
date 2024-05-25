@@ -38,31 +38,54 @@
 
 /* Mis estilos para configuración */
 /* Celular */
-/* Letra de song*/
-body.large-song-text {
+/* Letra de song X1.4*/
+body.large-song-text-1 {
     .song-header {
-        font-size: 1.3em;
+        font-size: 1.4em;
     }
 
     .song-item {
-        font-size: 1.2em;
+        font-size: 1.3em;
     }
 }
 
 /*Contenido de lista*/
-body.large-list-text {
+body.large-list-text-1 {
     .list-header {
-        font-size: 1.3em;
+        font-size: 1.4em;
     }
 
     .list-item {
-        font-size: 1.2em;
+        font-size: 1.3em;
     }
 }
+
+/* Letra de song X1.8*/
+body.large-song-text-2 {
+    .song-header {
+        font-size: 1.8em;
+    }
+
+    .song-item {
+        font-size: 1.7em;
+    }
+}
+
+/*Contenido de lista*/
+body.large-list-text-2 {
+    .list-header {
+        font-size: 1.8em;
+    }
+
+    .list-item {
+        font-size: 1.7em;
+    }
+}
+
 
 /* TABLET */
 /* Letra de song */
-body.large-song-text-tablet {
+body.large-song-text-tablet-1 {
     .song-header {
         font-size: 1.8em;
     }
@@ -73,12 +96,34 @@ body.large-song-text-tablet {
 }
 
 /*Contenido de lista*/
-body.large-list-text-tablet {
+body.large-list-text-tablet-1 {
     .list-header {
         font-size: 1.8em;
     }
 
     .list-item {
         font-size: 1.7em;
+    }
+}
+
+/* Letra de song */
+body.large-song-text-tablet-2 {
+    .song-header {
+        font-size: 2.4em;
+    }
+
+    .song-item {
+        font-size: 2.3em;
+    }
+}
+
+/*Contenido de lista*/
+body.large-list-text-tablet-2 {
+    .list-header {
+        font-size: 2.4em;
+    }
+
+    .list-item {
+        font-size: 2.3em;
     }
 }
