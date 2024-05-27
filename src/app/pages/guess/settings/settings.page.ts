@@ -27,7 +27,7 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
     this.navbarService.setTitle('Configuración'); // Título de la página
-    this.navbarService.setColor('primary'); // Color del navbar
+    this.navbarService.setColor('dark'); // Color del navbar
     this.largeSongTextEnabled1 = this.configService.isLargeSongTextEnabled1(); // Texto grande para canciones
     this.largeListTextEnabled1 = this.configService.isLargeListTextEnabled1(); // Texto grande para listas
     this.largeSongTextEnabled2 = this.configService.isLargeSongTextEnabled2(); // Texto grande para canciones

@@ -40,5 +40,13 @@ span {
     width: 80%;
     max-width: 500px;
     margin: 1em 0;
-    /* Space between buttons */
+    font-weight: bold;
+}
+
+ion-footer {
+    p {
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+
+    }
 }
