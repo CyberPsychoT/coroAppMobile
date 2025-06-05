@@ -1,4 +1,5 @@
 <app-nav-bar></app-nav-bar>
+
 <ion-content>
   <div class="contenido">
     <ion-list lines="none" class="list-visualizer">
@@ -19,10 +20,31 @@
             *ngIf="section.open"></ion-icon>
         </ion-item>
         <div *ngIf="section.open">
-          <p class="song-item" style="white-space: pre-wrap">{{ section.content
-            }}</p>
+          <p class="song-item" style="white-space: pre-wrap">
+            {{ section.content }}
+          </p>
         </div>
       </ng-container>
     </ion-list>
   </div>
-</ion-content>
+
+  <!-- Botón flotante izquierda (Anterior) -->
+  <!-- <ion-fab vertical="center" horizontal="start" slot="fixed">
+    <ion-fab-button
+      color="medium"
+      (click)="prevSong()"
+      [disabled]="currentIndex === 0">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
+  <!-- Botón flotante derecha (Siguiente) -->
+  <!-- <ion-fab vertical="center" horizontal="end" slot="fixed">
+    <ion-fab-button
+      color="medium"
+      (click)="nextSong()"
+      [disabled]="currentIndex === songIds.length - 1">
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content> -->

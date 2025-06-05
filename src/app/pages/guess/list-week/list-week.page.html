@@ -5,7 +5,8 @@
     class="search-bar"
     placeholder="Buscar lista"
     [(ngModel)]="searchTerm"
-    (input)="filterLists()" />
+    (input)="filterLists()"
+  />
 </div>
 <ion-content class="background-content">
   <div class="overlay"></div>
@@ -13,7 +14,7 @@
     <div class="list-week" *ngFor="let list of filteredLists">
       <div class="list-item" (click)="openListPage(list.id)">
         <span class="list-label">
-          <b class="fas fa-music icon-musical-note"></b> {{ list.name }}
+          <b class="fas fa-list-alt"></b> {{ list.name }}
         </span>
       </div>
     </div>

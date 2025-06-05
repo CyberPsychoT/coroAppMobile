@@ -1,3 +1,4 @@
+import { Timestamp } from '@angular/fire/firestore';
 import { ListSong } from './list-song';
 
 export interface List {
@@ -5,6 +6,6 @@ export interface List {
   name: string;
   description?: string;
   songs: ListSong[]; // Utiliza ListSong para manejar canciones y secciones
-  createdAt?: Date;
+  createdAt?: Date | string | Timestamp;
   selected?: boolean;
 }

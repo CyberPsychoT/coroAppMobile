@@ -23,7 +23,7 @@ export class ListPage implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private firestoreService: FirestoreService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.routeSub = this.activatedRoute.params
@@ -121,7 +121,15 @@ export class ListPage implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  openSongPage(songId: string) {
-    this.router.navigate(['guess/songs/song', songId]);
+  openSongPage(songId: string, songs: Song[]) {
+    const songIds = songs.map((s) => s.id);
+    const index = songIds.indexOf(songId);
+
+    this.router.navigate(['guess/songs/song', songId], {
+      queryParams: {
+        songIds: songIds.join(','),
+        index: index,
+      },
+    });
   }
 }
