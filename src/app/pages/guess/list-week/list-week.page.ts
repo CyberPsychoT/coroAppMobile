@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavBarService } from 'src/app/services/nav-bar.service';
-import { List } from 'src/app/interfaces/list'; // Asegúrate que esta interfaz exista y tenga 'name' y opcionalmente 'id' y 'createdAt'
+import { List } from 'src/app/interfaces/list';
 import { Router } from '@angular/router';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,9 +11,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./list-week.page.scss'],
 })
 export class ListWeekPage implements OnInit {
-  allLists: List[] = []; // Almacena todas las listas obtenidas de Firestore
-  latestList: List | null = null; // Almacenará solo la lista más reciente
-  filteredLists: List[] = []; // Para el *ngFor, contendrá 0 o 1 elemento (la latestList si cumple el filtro)
+
+  // --- CAMBIOS AQUÍ ---
+  allLists: List[] = []; // Almacena TODAS las listas obtenidas de Firestore
+  // latestList: List | null = null; // <-- ELIMINADO: Ya no necesitamos esta variable
+  filteredLists: List[] = []; // Para el *ngFor, contendrá LAS LISTAS FILTRADAS
+  // --- FIN DE CAMBIOS ---
+
   searchTerm: string = '';
 
   constructor(
@@ -24,62 +28,53 @@ export class ListWeekPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.navbarService.setTitle('Última Lista Semanal'); // Título ajustado
+    // --- CAMBIO DE TÍTULO ---
+    this.navbarService.setTitle('Listas Semanales'); // Título más general
     this.navbarService.setColor('primary');
 
     this.firestore.getLists().subscribe((listsFromDB) => {
       if (!listsFromDB || listsFromDB.length === 0) {
         this.allLists = [];
-        this.latestList = null;
+        // this.latestList = null; // <-- ELIMINADO
         this.filterLists(); // Actualiza filteredLists a un array vacío
         return;
       }
 
-      this.allLists = listsFromDB;
-
-      // --- Lógica para determinar la "última lista creada" ---
-      // Idealmente, deberías tener un campo como 'createdAt' (Timestamp de Firebase) en tus objetos List.
-      // Ejemplo: list.createdAt.toDate() para comparar fechas.
-      // Si no tienes 'createdAt', esta ordenación por nombre no garantiza la "última creada".
-      // En ese caso, la "última" será la última en el array después de esta ordenación por nombre,
-      // o podrías tomar listsFromDB[listsFromDB.length - 1] ANTES de cualquier ordenación si confías en el orden de llegada.
-
-      // Intentar ordenar por 'createdAt' si existe.
-      // Esto es una suposición de cómo podría ser tu campo 'createdAt'. Ajusta según tu estructura de datos.
-      const sortedLists = [...this.allLists].sort((a, b) => {
+      // --- Lógica de ordenación (tu lógica es buena, la mantenemos) ---
+      const sortedLists = [...listsFromDB].sort((a, b) => {
         const dateA = this.getDateFromListItem(a);
         const dateB = this.getDateFromListItem(b);
 
         if (dateA && dateB) {
           return dateB.getTime() - dateA.getTime(); // Descendente, la más reciente primero
         }
-        if (dateA) return -1; // a tiene fecha, b no, a va primero (más reciente)
-        if (dateB) return 1;  // b tiene fecha, a no, b va primero
+        if (dateA) return -1;
+        if (dateB) return 1;
 
-        // Fallback: si no hay fechas, ordena por nombre o mantén el orden actual
         const nameA = typeof a.name === 'string' ? a.name.toLowerCase() : '';
         const nameB = typeof b.name === 'string' ? b.name.toLowerCase() : '';
-        return nameB.localeCompare(nameA); // O como prefieras ordenarlas si no hay fecha
+        return nameB.localeCompare(nameA);
       });
+      // --- Fin de la lógica de ordenación ---
 
-      this.latestList = sortedLists.length > 0 ? sortedLists[0] : null;
-      // --- Fin de la lógica para determinar la última lista ---
 
-      this.filterLists(); // Aplicar filtro inicial (mostrar la última lista si existe)
+      // --- CAMBIOS AQUÍ ---
+      // Guardamos TODAS las listas ordenadas, no solo la primera
+      this.allLists = sortedLists;
+      // this.latestList = sortedLists.length > 0 ? sortedLists[0] : null; // <-- ELIMINADO
+      // --- FIN DE CAMBIOS ---
+
+      this.filterLists(); // Aplicar filtro inicial (mostrará todas las listas)
     });
   }
 
   /**
-   * Helper para obtener un objeto Date desde un item de lista.
-   * Asume que 'createdAt' puede ser un Timestamp de Firestore, un string de fecha o un objeto Date.
+   * Helper para obtener un objeto Date (esto no cambia, está bien)
    */
   private getDateFromListItem(list: List): Date | null {
     const createdAt = list.createdAt;
-
     if (!createdAt) return null;
-
     if (createdAt instanceof Date) return createdAt;
-
     if (
       typeof createdAt === 'object' &&
       createdAt !== null &&
@@ -87,23 +82,16 @@ export class ListWeekPage implements OnInit {
     ) {
       return (createdAt as any).toDate();
     }
-
     if (typeof createdAt === 'string') {
       const date = new Date(createdAt);
       return isNaN(date.getTime()) ? null : date;
     }
-
     return null;
   }
 
 
   /**
-   * Normaliza un string para la búsqueda:
-   * - Convierte a minúsculas.
-   * - Elimina acentos.
-   * - Elimina caracteres especiales no alfanuméricos (excepto espacios).
-   * @param term El string a normalizar.
-   * @returns El string normalizado.
+   * Normaliza un string para la búsqueda (esto no cambia, está bien)
    */
   private normalizeSearchTerm(term: string): string {
     if (!term) return '';
@@ -113,34 +101,35 @@ export class ListWeekPage implements OnInit {
     return normalized.trim();
   }
 
+  // --- ¡CAMBIO IMPORTANTE AQUÍ! ---
+  /**
+   * Filtra la lista COMPLETA (allLists) basado en el searchTerm.
+   */
   filterLists() {
-    if (!this.latestList) {
-      this.filteredLists = [];
-      return;
-    }
-
     const normalizedSearchTerm = this.normalizeSearchTerm(this.searchTerm);
-    const latestListName = typeof this.latestList.name === 'string' ? this.latestList.name : '';
-    const normalizedLatestListName = this.normalizeSearchTerm(latestListName);
 
     if (normalizedSearchTerm === '') {
-      // Si no hay término de búsqueda, muestra la última lista
-      this.filteredLists = [this.latestList];
-    } else if (normalizedLatestListName.includes(normalizedSearchTerm)) {
-      // Si hay término de búsqueda y la última lista coincide, muéstrala
-      this.filteredLists = [this.latestList];
+      // Si no hay término de búsqueda, muestra TODAS las listas
+      this.filteredLists = [...this.allLists]; // Usamos 'allLists'
     } else {
-      // Si no coincide, no muestra nada
-      this.filteredLists = [];
+      // Si hay término de búsqueda, filtra 'allLists'
+      this.filteredLists = this.allLists.filter(list => {
+        const listName = typeof list.name === 'string' ? list.name : '';
+        const normalizedListName = this.normalizeSearchTerm(listName);
+
+        // Devuelve true si el nombre de la lista incluye el término de búsqueda
+        return normalizedListName.includes(normalizedSearchTerm);
+      });
     }
   }
+  // --- FIN DEL CAMBIO IMPORTANTE ---
+
 
   openListPage(listId: string | undefined) {
     if (listId) {
       this.router.navigate(['guess/list-week/list', listId]);
     } else {
       console.error('Error: List ID is undefined. Cannot navigate.');
-      // Podrías mostrar un toast o alerta al usuario aquí si es apropiado
     }
   }
 }
