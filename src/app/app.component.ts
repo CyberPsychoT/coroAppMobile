@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { MenuController, ToastController } from '@ionic/angular';
 import { AuthService } from './services/auth.service';
 import { ConfigService } from './services/config.service';
+import { UpdateService } from './services/update.service';
 
 @Component({
   selector: 'app-root',
@@ -28,8 +29,10 @@ export class AppComponent {
     private toastController: ToastController,
     public authService: AuthService,
     private configService: ConfigService,
+    private updateService: UpdateService
   ) {
     this.applyStoredConfigurations();
+    this.updateService.checkForUpdates();
   }
 
   //Aplicacion configuración
@@ -108,5 +111,9 @@ export class AppComponent {
         this.router.navigate(['auth/landing']);
       })
       .catch((error) => console.log(error));
+  }
+
+  checkUpdate() {
+    this.updateService.checkForUpdates(true);
   }
 }

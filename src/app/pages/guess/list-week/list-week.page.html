@@ -1,22 +1,55 @@
-<app-nav-bar></app-nav-bar>
-<div class="search-bar-container">
-  <input
-    type="text"
-    class="search-bar"
-    placeholder="Buscar lista"
-    [(ngModel)]="searchTerm"
-    (input)="filterLists()"
-  />
-</div>
-<ion-content class="background-content">
-  <div class="overlay"></div>
-  <div class="content-wrapper">
-    <div class="list-week" *ngFor="let list of filteredLists">
-      <div class="list-item" (click)="openListPage(list.id)">
-        <span class="list-label">
-          <b class="fas fa-list-alt"></b> {{ list.name }}
-        </span>
+<ion-content [fullscreen]="true">
+  <div class="page-container">
+    
+    <!-- Header Section -->
+    <div class="header-section animate-fade-in-down">
+      <app-nav-bar></app-nav-bar>
+      <h1>Listas <span class="highlight">Semanales</span></h1>
+      <p>Organiza y accede a las listas de canciones para cada ocasión.</p>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-container animate-fade-in-up">
+      <div class="search-box">
+        <ion-icon name="search-outline"></ion-icon>
+        <input
+          type="text"
+          placeholder="Buscar lista..."
+          [(ngModel)]="searchTerm"
+          (input)="filterLists()" />
       </div>
     </div>
+
+    <!-- Lists Grid -->
+    <div class="content-wrapper">
+      <div class="lists-grid">
+        <div 
+          class="list-card animate-fade-in-up" 
+          *ngFor="let list of filteredLists; let i = index"
+          [style.animation-delay]="i * 0.05 + 's'"
+          (click)="openListPage(list.id)">
+          
+          <div class="card-icon">
+            <ion-icon name="calendar-number"></ion-icon>
+          </div>
+          
+          <div class="card-content">
+            <h3>{{ list.name }}</h3>
+            <div class="card-footer">
+              <span class="action-text">Ver canciones</span>
+              <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- Empty State -->
+      <div class="empty-state animate-fade-in-up" *ngIf="filteredLists.length === 0">
+        <ion-icon name="albums-outline"></ion-icon>
+        <p>No se encontraron listas</p>
+      </div>
+    </div>
+
   </div>
 </ion-content>

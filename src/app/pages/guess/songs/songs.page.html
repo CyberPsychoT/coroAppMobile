@@ -1,21 +1,55 @@
-<app-nav-bar></app-nav-bar>
-<div class="search-bar-container">
-  <input
-    type="text"
-    class="search-bar"
-    placeholder="Buscar canción"
-    [(ngModel)]="searchTerm"
-    (input)="filterSongs()" />
-</div>
-<ion-content class="background-content">
-  <div class="overlay"></div>
-  <div class="content-wrapper">
-    <div class="song-list" *ngFor="let song of filteredSongs">
-      <div class="song-item" (click)="openSongPage(song.id)">
-        <span class="song-label">
-          <b class="fas fa-music icon-musical-note"></b> {{ song.name }}
-        </span>
+<ion-content [fullscreen]="true">
+  <div class="page-container">
+    
+    <!-- Header Section -->
+    <div class="header-section animate-fade-in-down">
+      <app-nav-bar></app-nav-bar>
+      <h1>Repertorio <span class="highlight">Musical</span></h1>
+      <p>Explora y encuentra todas las canciones del coro.</p>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-container animate-fade-in-up">
+      <div class="search-box">
+        <ion-icon name="search-outline"></ion-icon>
+        <input
+          type="text"
+          placeholder="Buscar canción..."
+          [(ngModel)]="searchTerm"
+          (input)="filterSongs()" />
       </div>
     </div>
+
+    <!-- Songs Grid -->
+    <div class="content-wrapper">
+      <div class="songs-grid">
+        <div 
+          class="song-card animate-fade-in-up" 
+          *ngFor="let song of filteredSongs; let i = index"
+          [style.animation-delay]="i * 0.05 + 's'"
+          (click)="openSongPage(song.id)">
+          
+          <div class="card-icon">
+            <ion-icon name="musical-note"></ion-icon>
+          </div>
+          
+          <div class="card-content">
+            <h3>{{ song.name }}</h3>
+            <div class="card-footer">
+              <span class="action-text">Ver letra</span>
+              <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- Empty State -->
+      <div class="empty-state animate-fade-in-up" *ngIf="filteredSongs.length === 0">
+        <ion-icon name="musical-notes-outline"></ion-icon>
+        <p>No se encontraron canciones</p>
+      </div>
+    </div>
+
   </div>
 </ion-content>

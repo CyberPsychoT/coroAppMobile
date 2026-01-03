@@ -41,6 +41,8 @@ export class SongPage implements OnInit {
       this.songIds = query['songIds']?.split(',') || [];
       this.currentIndex = +query['index'] || 0;
 
+      console.log('SongPage loaded. IDs:', this.songIds, 'Current Index:', this.currentIndex);
+
       this.loadSong(songId);
     });
   }
@@ -72,6 +74,7 @@ export class SongPage implements OnInit {
           songIds: this.songIds.join(','),
           index: nextIndex,
         },
+        replaceUrl: true,
       });
     }
   }
@@ -84,6 +87,7 @@ export class SongPage implements OnInit {
           songIds: this.songIds.join(','),
           index: prevIndex,
         },
+        replaceUrl: true,
       });
     }
   }

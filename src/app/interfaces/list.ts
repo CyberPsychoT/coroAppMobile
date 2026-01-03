@@ -8,4 +8,5 @@ export interface List {
   songs: ListSong[]; // Utiliza ListSong para manejar canciones y secciones
   createdAt?: Date | string | Timestamp;
   selected?: boolean;
+  status?: boolean;
 }

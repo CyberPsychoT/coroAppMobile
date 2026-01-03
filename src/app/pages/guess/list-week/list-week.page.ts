@@ -60,7 +60,18 @@ export class ListWeekPage implements OnInit {
 
       // --- CAMBIOS AQUÍ ---
       // Guardamos TODAS las listas ordenadas, no solo la primera
-      this.allLists = sortedLists;
+      // FILTRO: Solo mostramos las listas que tengan status === true (o undefined si asumimos true por defecto, pero el usuario dijo "si es false no se debe mostrar")
+      // Asumiremos que si no tiene status, se muestra (o se puede ajustar según requerimiento estricto).
+      // El usuario dijo: "si el campo status de la lista es true se debe mostrar, si es false no se debe mostrar".
+      // Vamos a filtrar estrictamente por true, o permitir undefined si es legacy?
+      // "ahora las listas tienen el campo 'status'". Asumiremos que si existe, se respeta.
+      // Si el usuario dice "tengo una lista en false", implica que el campo existe.
+      // Para seguridad, filtraremos: list.status === true.
+      // PERO, si es un campo nuevo, las viejas podrían no tenerlo.
+      // Revisando el requerimiento: "si el campo status de la lista es true se debe mostrar, si es false no se debe mostrar".
+      // Voy a asumir que status === true es la condición.
+      
+      this.allLists = sortedLists.filter(list => list.status === true);
       // this.latestList = sortedLists.length > 0 ? sortedLists[0] : null; // <-- ELIMINADO
       // --- FIN DE CAMBIOS ---
 

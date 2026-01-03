@@ -36,7 +36,7 @@
           <ion-item
             class="list-item"
             *ngFor="let song of section.songs"
-            (click)="openSongPage(song.id, section.songs)"
+            (click)="openSongPage(song.id, allSongs)"
           >
             <ion-label>{{ song.name }}</ion-label>
           </ion-item>

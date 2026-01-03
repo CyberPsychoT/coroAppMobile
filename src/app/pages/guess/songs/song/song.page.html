@@ -28,23 +28,15 @@
     </ion-list>
   </div>
 
-  <!-- Botón flotante izquierda (Anterior) -->
-  <!-- <ion-fab vertical="center" horizontal="start" slot="fixed">
-    <ion-fab-button
-      color="medium"
-      (click)="prevSong()"
-      [disabled]="currentIndex === 0">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
-
-  <!-- Botón flotante derecha (Siguiente) -->
-  <!-- <ion-fab vertical="center" horizontal="end" slot="fixed">
-    <ion-fab-button
-      color="medium"
-      (click)="nextSong()"
-      [disabled]="currentIndex === songIds.length - 1">
-      <ion-icon name="arrow-forward-outline"></ion-icon>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="songIds.length > 0">
+    <ion-fab-button (click)="nextSong()" color="secondary" [disabled]="currentIndex === songIds.length - 1">
+      <ion-icon name="arrow-forward"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-</ion-content> -->
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="songIds.length > 0">
+    <ion-fab-button (click)="prevSong()" color="secondary" [disabled]="currentIndex === 0">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

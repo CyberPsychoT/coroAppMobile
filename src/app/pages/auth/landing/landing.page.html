@@ -1,30 +1,72 @@
 <ion-content [fullscreen]="true">
-  <div class="container">
-    <div class="content">
-      <!-- IMAGEN -->
-      <ion-img
-        class="img"
-        src="../../../../assets/coro.jpg"
-        alt="CoroApp"></ion-img>
-      <h1>Bienvenido a<br /><span>CoroApp</span></h1>
-      <ion-icon name="arrow-down"></ion-icon>
-      <!-- BOTONES -->
-      <div class="center-content">
-        <!-- <ion-button color="primary" shape="round" (click)="goToLogin()">
-          <ion-icon slot="start" name="person"></ion-icon> Administrador
-          <ion-icon slot="end" name="arrow-forward"></ion-icon>
-        </ion-button><br> -->
-        <ion-button color="primary" shape="round" (click)="goToHome()">
-          <ion-icon slot="start" name="man"></ion-icon> Miembro del Coro
-          <ion-icon slot="end" name="arrow-forward"></ion-icon>
-        </ion-button>
+  <div class="landing-container">
+    
+    <!-- Header / Navbar -->
+    <header class="header">
+      <div class="logo">
+        <ion-icon name="musical-notes"></ion-icon>
+        <span>CoroApp</span>
       </div>
-    </div>
+      <!-- <ion-button fill="clear" color="light" (click)="goToLogin()">
+        Ingresar <ion-icon slot="end" name="log-in-outline"></ion-icon>
+      </ion-button> -->
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="animate-fade-in-up"><span class="highlight">P. San Pedro y San Pablo</span></h1>
+        <!-- <p class="animate-fade-in-up delay-1">Gestiona canciones, listas y ensayos de manera profesional.</p> -->
+        
+        <div class="cta-buttons animate-fade-in-up delay-2">
+          <ion-button class="cta-primary" shape="round" size="large" (click)="goToHome()">
+            Soy Miembro<ion-icon slot="end" name="arrow-forward-circle"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+      
+      <div class="hero-image animate-fade-in-right">
+        <div class="image-wrapper">
+           <img src="assets/coro.jpg" alt="CoroApp Hero">
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <!-- <section class="features-section">
+      <div class="feature-card">
+        <div class="icon-box">
+          <ion-icon name="musical-note"></ion-icon>
+        </div>
+        <h3>Repertorio</h3>
+        <p>Accede a todas las partituras y letras al instante.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-box">
+          <ion-icon name="calendar"></ion-icon>
+        </div>
+        <h3>Agenda</h3>
+        <p>Organiza ensayos y misas eficientemente.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-box">
+          <ion-icon name="people"></ion-icon>
+        </div>
+        <h3>Comunidad</h3>
+        <p>Mantente conectado con tu grupo coral.</p>
+      </div>
+    </section> -->
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2024 CoroApp. Parroquia San Pedro y San Pablo.</p>
+      <div class="social-links">
+        <ion-icon name="logo-facebook"></ion-icon>
+        <ion-icon name="logo-instagram"></ion-icon>
+      </div>
+    </footer>
+
   </div>
 </ion-content>
-<ion-footer [translucent]="true" mode="ios"
-  class="ion-no-border ion-text-center">
-  <ion-toolbar>
-    <p>Parroquia San Pedro y San Pablo</p>
-  </ion-toolbar>
-</ion-footer>

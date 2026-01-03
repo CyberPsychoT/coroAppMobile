@@ -1,7 +1,7 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
-      <ion-content class="ion-palette-dark">
+      <ion-content>
         <ion-list id="inbox-list">
           <ion-toolbar class="header">
             <ion-avatar>
@@ -29,6 +29,11 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          
+          <ion-item lines="none" (click)="checkUpdate()" button detail="false" class="update-item">
+            <ion-icon slot="start" ios="cloud-download-outline" md="cloud-download-sharp"></ion-icon>
+            <ion-label>Actualizar app</ion-label>
+          </ion-item>
         </ion-list>
       </ion-content>
     </ion-menu>

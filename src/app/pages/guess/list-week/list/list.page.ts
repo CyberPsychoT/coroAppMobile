@@ -117,6 +117,10 @@ export class ListPage implements OnInit, OnDestroy {
     });
   }
 
+  get allSongs(): Song[] {
+    return this.sections.reduce((acc, section) => [...acc, ...section.songs], []);
+  }
+
   goToBack() {
     this.location.back();
   }
