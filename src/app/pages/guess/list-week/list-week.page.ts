@@ -12,13 +12,10 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ListWeekPage implements OnInit {
 
-  // --- CAMBIOS AQUÍ ---
-  allLists: List[] = []; // Almacena TODAS las listas obtenidas de Firestore
-  // latestList: List | null = null; // <-- ELIMINADO: Ya no necesitamos esta variable
-  filteredLists: List[] = []; // Para el *ngFor, contendrá LAS LISTAS FILTRADAS
-  // --- FIN DE CAMBIOS ---
-
+  allLists: List[] = [];
+  filteredLists: List[] = [];
   searchTerm: string = '';
+  isLoading: boolean = true;
 
   constructor(
     private router: Router,
@@ -28,15 +25,15 @@ export class ListWeekPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // --- CAMBIO DE TÍTULO ---
-    this.navbarService.setTitle('Listas Semanales'); // Título más general
+    this.navbarService.setTitle('Listas Semanales');
     this.navbarService.setColor('primary');
+    this.isLoading = true;
 
     this.firestore.getLists().subscribe((listsFromDB) => {
       if (!listsFromDB || listsFromDB.length === 0) {
         this.allLists = [];
-        // this.latestList = null; // <-- ELIMINADO
-        this.filterLists(); // Actualiza filteredLists a un array vacío
+        this.filterLists();
+        this.isLoading = false;
         return;
       }
 
@@ -72,10 +69,8 @@ export class ListWeekPage implements OnInit {
       // Voy a asumir que status === true es la condición.
       
       this.allLists = sortedLists.filter(list => list.status === true);
-      // this.latestList = sortedLists.length > 0 ? sortedLists[0] : null; // <-- ELIMINADO
-      // --- FIN DE CAMBIOS ---
-
-      this.filterLists(); // Aplicar filtro inicial (mostrará todas las listas)
+      this.filterLists();
+      this.isLoading = false;
     });
   }
 

@@ -2,6 +2,7 @@
 // http://ionicframework.com/docs/theming/
 
 :root {
+    // --- BRAND COLORS (Light Mode) ---
     --ion-color-primary: #ff8c00;
     --ion-color-primary-rgb: 255, 140, 0;
     --ion-color-primary-contrast: #ffffff;
@@ -23,45 +24,96 @@
     --ion-color-tertiary-shade: #e0bd00;
     --ion-color-tertiary-tint: #ffdb1a;
 
+    // --- MODERN DESIGN TOKENS (Light Mode) ---
     --background-gradient: linear-gradient(135deg, #fffcf9 0%, #fff5e6 100%);
-    --text-color-primary: #333333;
-    --text-color-secondary: #666666;
+    --ion-background-color: #fafafa;
+    --text-color-primary: #1e293b;
+    --text-color-secondary: #64748b;
+    
     --card-background: #ffffff;
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+    --card-shadow-hover: 0 20px 25px -5px rgba(255, 140, 0, 0.1), 0 8px 10px -6px rgba(255, 140, 0, 0.05);
+    
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 32px;
 }
 
-// ====================================================================
-// AÑADE ESTE BLOQUE
-// Sobrescribe los colores para la paleta DARK si la estás usando
-// Esto asegura que tu color primary se use dentro del ion-menu que tiene la clase ion-palette-dark
-// ====================================================================
+// Dark Mode Mixin to avoid repetition
+@mixin dark-mode-tokens {
+    // Keep primary vibrant but slightly adjusted for dark mode comfort if needed
+    --ion-color-primary: #ff9d2e;
+    --ion-color-primary-rgb: 255, 157, 46;
+    --ion-color-primary-contrast: #000000;
+    --ion-color-primary-shade: #e08a28;
+    --ion-color-primary-tint: #ffa743;
 
+    --ion-color-secondary: #ff5f24;
+    --ion-color-secondary-rgb: 255, 95, 36;
+    
+    // Backgrounds and Surfaces
+    --ion-background-color: #0f172a; // Slate 900
+    --background-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    
+    --text-color-primary: #f8fafc;
+    --text-color-secondary: #94a3b8;
+    
+    --card-background: #1e293b; // Slate 800
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+    --card-shadow-hover: 0 20px 25px -5px rgba(255, 157, 46, 0.15), 0 8px 10px -6px rgba(255, 157, 46, 0.1);
+    
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.05);
+
+    // Ionic specific dark overrides
+    --ion-text-color: #f8fafc;
+    --ion-text-color-rgb: 248,250,252;
+    --ion-item-background: #1e293b;
+}
+
+// --- DARK MODE (System + Class support) ---
+@media (prefers-color-scheme: dark) {
+    :root:not(.force-light-mode) {
+        @include dark-mode-tokens;
+    }
+}
 .ion-palette-dark {
-    /** primary */
+    @include dark-mode-tokens;
+}
+
+// Force Light Mode override
+body.force-light-mode, :root.force-light-mode {
     --ion-color-primary: #ff8c00;
     --ion-color-primary-rgb: 255, 140, 0;
     --ion-color-primary-contrast: #ffffff;
-    --ion-color-primary-contrast-rgb: 255, 255, 255;
     --ion-color-primary-shade: #e07b00;
     --ion-color-primary-tint: #ff981a;
 
-    /** secondary */
     --ion-color-secondary: #ff4500;
     --ion-color-secondary-rgb: 255, 69, 0;
-    --ion-color-secondary-contrast: #ffffff;
-    --ion-color-secondary-contrast-rgb: 255, 255, 255;
-    --ion-color-secondary-shade: #e03d00;
-    --ion-color-secondary-tint: #ff581a;
     
-    /** tertiary */
-    --ion-color-tertiary: #ffd700;
-    --ion-color-tertiary-rgb: 255, 215, 0;
-    --ion-color-tertiary-contrast: #000000;
-    --ion-color-tertiary-contrast-rgb: 0, 0, 0;
-    --ion-color-tertiary-shade: #e0bd00;
-    --ion-color-tertiary-tint: #ffdb1a;
+    --ion-background-color: #fafafa;
+    --background-gradient: linear-gradient(135deg, #fffcf9 0%, #fff5e6 100%);
+    
+    --text-color-primary: #1e293b;
+    --text-color-secondary: #64748b;
+    
+    --card-background: #ffffff;
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+    --card-shadow-hover: 0 20px 25px -5px rgba(255, 140, 0, 0.1), 0 8px 10px -6px rgba(255, 140, 0, 0.05);
+    
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.4);
+
+    --ion-text-color: #1e293b;
+    --ion-item-background: #ffffff;
 }
 
+// Ionic CSS Variable setup based on custom variables
 .ion-color-primary {
 	--ion-color-base: var(--ion-color-primary);
 	--ion-color-base-rgb: var(--ion-color-primary-rgb);
@@ -70,7 +122,6 @@
 	--ion-color-shade: var(--ion-color-primary-shade);
 	--ion-color-tint: var(--ion-color-primary-tint);
 }
-
 .ion-color-secondary {
 	--ion-color-base: var(--ion-color-secondary);
 	--ion-color-base-rgb: var(--ion-color-secondary-rgb);
@@ -79,7 +130,6 @@
 	--ion-color-shade: var(--ion-color-secondary-shade);
 	--ion-color-tint: var(--ion-color-secondary-tint);
 }
-
 .ion-color-tertiary {
 	--ion-color-base: var(--ion-color-tertiary);
 	--ion-color-base-rgb: var(--ion-color-tertiary-rgb);
@@ -88,7 +138,6 @@
 	--ion-color-shade: var(--ion-color-tertiary-shade);
 	--ion-color-tint: var(--ion-color-tertiary-tint);
 }
-
 .ion-color-background {
 	--ion-color-base: var(--ion-color-background);
 	--ion-color-base-rgb: var(--ion-color-background-rgb);

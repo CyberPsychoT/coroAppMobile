@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>{{ list?.name || '' }}</ion-title>
+    <div class="custom-title">{{ list?.name || '' }}</div>
     <ion-buttons slot="end">
       <ion-button (click)="goToBack()"
         ><ion-icon slot="icon-only" name="arrow-back-circle-outline"></ion-icon
@@ -12,36 +12,47 @@
 
 <ion-content [fullscreen]="true">
   <div class="contenido">
-    <ng-container *ngFor="let section of sections">
-      <ion-item
-        (click)="section.open = !section.open"
-        color="light"
-        lines="full"
-        class="list-header"
-      >
-        <ion-label>{{ section.name }}</ion-label>
-        <ion-icon
-          slot="end"
-          name="chevron-down-outline"
-          *ngIf="!section.open"
-        ></ion-icon>
-        <ion-icon
-          slot="end"
-          name="chevron-up-outline"
-          *ngIf="section.open"
-        ></ion-icon>
+    <!-- Skeleton Loaders -->
+    <div *ngIf="isLoading">
+      <ion-item color="light" lines="full" class="list-header" *ngFor="let item of [1,2,3]">
+        <ion-skeleton-text animated style="width: 50%; height: 20px;"></ion-skeleton-text>
       </ion-item>
-      <div *ngIf="section.open">
-        <ion-list lines="none">
-          <ion-item
-            class="list-item"
-            *ngFor="let song of section.songs"
-            (click)="openSongPage(song.id, allSongs)"
-          >
-            <ion-label>{{ song.name }}</ion-label>
-          </ion-item>
-        </ion-list>
-      </div>
+    </div>
+
+    <!-- Real Content -->
+    <ng-container *ngIf="!isLoading">
+      <ng-container *ngFor="let section of sections">
+        <ion-item
+          (click)="section.open = !section.open"
+          color="light"
+          lines="full"
+          class="list-header animate-fade-in-up"
+        >
+          <ion-label class="ion-text-wrap">{{ section.name }}</ion-label>
+          <ion-icon
+            slot="end"
+            name="chevron-down-outline"
+            *ngIf="!section.open"
+          ></ion-icon>
+          <ion-icon
+            slot="end"
+            name="chevron-up-outline"
+            *ngIf="section.open"
+          ></ion-icon>
+        </ion-item>
+        <div *ngIf="section.open" class="animate-fade-in-down">
+          <ion-list lines="none">
+            <ion-item
+              class="list-item hover-scale"
+              *ngFor="let song of section.songs"
+              (click)="openSongPage(song.id, allSongs)"
+              style="margin-bottom: 2px;"
+            >
+              <ion-label class="ion-text-wrap">{{ song.name }}</ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ng-container>
     </ng-container>
   </div>
 </ion-content>

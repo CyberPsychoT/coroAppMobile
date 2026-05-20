@@ -176,9 +176,8 @@ ion-content {
       font-size: 1.1rem;
       font-weight: 600;
       color: var(--text-color-primary);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: normal;
+      word-break: break-word;
     }
     
     .card-footer {

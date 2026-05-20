@@ -16,6 +16,7 @@ import { switchMap, debounceTime } from 'rxjs/operators';
 export class ListPage implements OnInit, OnDestroy {
   list: List | undefined;
   sections: any[] = [];
+  isLoading: boolean = true;
   private routeSub!: Subscription;
 
   constructor(
@@ -26,6 +27,7 @@ export class ListPage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.routeSub = this.activatedRoute.params
       .pipe(
         debounceTime(300), // Añade un pequeño retraso para evitar múltiples cargas rápidas
@@ -39,6 +41,8 @@ export class ListPage implements OnInit, OnDestroy {
         this.initializeSections(); // Reinicia las secciones para asegurar que están limpias
         if (list.songs && list.songs.length > 0) {
           this.loadSongs(list.songs); // Carga canciones según el nuevo modelo
+        } else {
+          this.isLoading = false;
         }
       });
   }
@@ -83,6 +87,13 @@ export class ListPage implements OnInit, OnDestroy {
   loadSongs(listSongs: ListSong[]) {
     // Limpiar canciones existentes antes de cargar nuevas para evitar duplicados
     this.sections.forEach((section) => (section.songs = []));
+    
+    if (listSongs.length === 0) {
+      this.isLoading = false;
+      return;
+    }
+    
+    let loadedCount = 0;
 
     listSongs.forEach((listSong) => {
       // Verifica que la canción no haya sido ya cargada
@@ -94,6 +105,7 @@ export class ListPage implements OnInit, OnDestroy {
         this.firestoreService
           .getSongById(listSong.songId)
           .subscribe((song: Song) => {
+            loadedCount++;
             if (song) {
               const sectionIndex = this.sections.findIndex(
                 (sec) => sec.name === listSong.section
@@ -112,7 +124,15 @@ export class ListPage implements OnInit, OnDestroy {
                 }
               }
             }
+            if (loadedCount === listSongs.length) {
+              this.isLoading = false;
+            }
           });
+      } else {
+        loadedCount++;
+        if (loadedCount === listSongs.length) {
+          this.isLoading = false;
+        }
       }
     });
   }

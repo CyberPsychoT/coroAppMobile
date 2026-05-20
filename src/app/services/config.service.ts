@@ -89,4 +89,14 @@ export class ConfigService {
   setLargeListTextTabletEnabled2(isEnabled: boolean): void {
     localStorage.setItem(this.LARGE_LIST_TEXT_TABLET_KEY_2, JSON.stringify(isEnabled));
   }
+
+  // Dark Mode Preference
+  isDarkModeEnabled(): boolean | null {
+    const item = localStorage.getItem('darkModeEnabled');
+    return item ? JSON.parse(item) : null;
+  }
+
+  setDarkModeEnabled(isEnabled: boolean): void {
+    localStorage.setItem('darkModeEnabled', JSON.stringify(isEnabled));
+  }
 }

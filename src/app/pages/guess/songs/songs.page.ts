@@ -10,32 +10,31 @@ import { NavBarService } from 'src/app/services/nav-bar.service';
   styleUrls: ['./songs.page.scss'],
 })
 export class SongsPage implements OnInit {
-  songs: any[] = []; // Inicializado como un arreglo vacío
-  filteredSongs: any[] = []; // Inicializado como un arreglo vacío
+  songs: any[] = [];
+  filteredSongs: any[] = [];
   searchTerm: string = '';
+  isLoading: boolean = true;
 
   constructor(
     private router: Router,
     private navbarService: NavBarService,
     public authService: AuthService,
     private fireStore: FirestoreService
-  ) {
-    // No es necesario inicializar con un objeto vacío aquí si se carga en ngOnInit
-  }
+  ) {}
 
   ngOnInit() {
-    this.navbarService.setTitle('Canciones'); //titulo de la pagina
-    this.navbarService.setColor('primary'); //Color del navbar
+    this.navbarService.setTitle('Canciones');
+    this.navbarService.setColor('primary');
+    
+    this.isLoading = true;
     this.fireStore.getSongs().subscribe((songs) => {
-      // Ordena las canciones por nombre
       this.songs = songs.sort((a, b) => {
-        // Manejo de casos donde 'name' podría no estar definido o no ser un string
         const nameA = typeof a.name === 'string' ? a.name : '';
         const nameB = typeof b.name === 'string' ? b.name : '';
         return nameA.localeCompare(nameB);
       });
-      // Inicialmente, filteredSongs es igual a todas las canciones
-      this.filterSongs(); // Llama a filterSongs para aplicar el filtro inicial (o mostrar todo si searchTerm está vacío)
+      this.filterSongs();
+      this.isLoading = false;
     });
   }
 

@@ -17,32 +17,40 @@ ion-menu.md ion-list {
   background: transparent;
 }
 
-ion-menu.md ion-toolbar {
+.menu-header {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 30px 15px 20px;
   text-align: center;
-  margin: 0 0 20px 0;
-  --background: transparent;
-  --color: #ffffff;
+  background: transparent;
 
   ion-avatar {
-    display: block;
-    margin: 0 auto;
-    border: 4px solid var(--ion-color-primary);
-    width: 80px;
-    height: 80px;
-    padding: 5px;
+    border: 3px solid var(--ion-color-primary);
+    width: 90px;
+    height: 90px;
+    padding: 3px;
     background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    margin-bottom: 15px;
+    
+    img {
+      border-radius: 50%;
+    }
   }
 
-  ion-title {
-    margin-top: 15px;
-    font-size: 28px;
-    color: #ffffff;
+  h2 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--text-color-primary, #ffffff);
     font-weight: 800;
+    letter-spacing: 0.5px;
   }
 
-  span {
-    font-size: 16px;
+  p {
+    margin: 5px 0 0;
+    font-size: 15px;
     color: var(--ion-color-primary);
     font-weight: 500;
   }

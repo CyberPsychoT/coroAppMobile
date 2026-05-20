@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import { ConfigService } from 'src/app/services/config.service';
 import { filter } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-song',
@@ -17,6 +18,7 @@ import { combineLatest } from 'rxjs';
 export class SongPage implements OnInit {
   song: Song | undefined;
   sections: any[] = [];
+  isLoading: boolean = true;
 
   songIds: string[] = [];
   currentIndex: number = 0;
@@ -29,6 +31,7 @@ export class SongPage implements OnInit {
     private authService: AuthService,
     private firestoreService: FirestoreService,
     private configService: ConfigService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -47,7 +50,6 @@ export class SongPage implements OnInit {
     });
   }
 
-
   loadFromRoute() {
     const songId = this.activatedRoute.snapshot.params['id'];
     const query = this.activatedRoute.snapshot.queryParams;
@@ -59,10 +61,12 @@ export class SongPage implements OnInit {
   }
 
   loadSong(songId: string) {
+    this.isLoading = true;
     this.firestoreService.getSongById(songId).subscribe((song) => {
       this.song = song;
       this.navbarService.setTitle(song?.name || '');
       this.initializeSections();
+      this.isLoading = false;
     });
   }
 
@@ -95,15 +99,41 @@ export class SongPage implements OnInit {
   initializeSections() {
     if (this.song) {
       this.sections = [
-        { name: 'Introducción', content: this.song.introduction, open: true },
-        { name: 'Letra y acordes', content: this.song.letter1, open: true },
-        { name: 'Interludio', content: this.song.interlude, open: true },
-        { name: 'Letra y acordes', content: this.song.letter2, open: true },
-        { name: 'Final', content: this.song.end, open: true },
-        { name: 'Etiqueta', content: this.song.label, open: false },
-        { name: 'Vídeo', content: '', open: false }, // Placeholder
+        { name: 'Introducción', content: this.song.introduction, parsedContent: this.parseChords(this.song.introduction), open: true },
+        { name: 'Letra y acordes', content: this.song.letter1, parsedContent: this.parseChords(this.song.letter1), open: true },
+        { name: 'Interludio', content: this.song.interlude, parsedContent: this.parseChords(this.song.interlude), open: true },
+        { name: 'Letra y acordes', content: this.song.letter2, parsedContent: this.parseChords(this.song.letter2), open: true },
+        { name: 'Final', content: this.song.end, parsedContent: this.parseChords(this.song.end), open: true },
+        { name: 'Etiqueta', content: this.song.label, parsedContent: this.parseChords(this.song.label), open: false },
+        { name: 'Vídeo', content: '', parsedContent: null, open: false }, // Placeholder
       ];
     }
+  }
+
+  parseChords(text: string | undefined): SafeHtml {
+    if (!text) return this.sanitizer.bypassSecurityTrustHtml('');
+    const lines = text.split('\n');
+    let htmlOutput = '';
+
+    lines.forEach(line => {
+      if (line.trim() === '') {
+        htmlOutput += '<br>';
+        return;
+      }
+
+      let parsedLine = line.replace(/\[(.*?)\]([^\[]*)/g, (match, chord, lyric) => {
+        return `<span class="chord-wrapper"><span class="chord">${chord}</span><span class="lyric">${lyric}</span></span>`;
+      });
+
+      if (!line.startsWith('[')) {
+        const firstPart = line.split('[')[0];
+        parsedLine = `<span class="lyric">${firstPart}</span>` + parsedLine.substring(firstPart.length);
+      }
+
+      htmlOutput += `<div class="lyric-line">${parsedLine}</div>`;
+    });
+
+    return this.sanitizer.bypassSecurityTrustHtml(htmlOutput);
   }
 
   goToBack() {

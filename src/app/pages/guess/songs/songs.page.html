@@ -22,9 +22,26 @@
 
     <!-- Songs Grid -->
     <div class="content-wrapper">
-      <div class="songs-grid">
+      
+      <!-- Skeleton Loaders -->
+      <div class="songs-grid" *ngIf="isLoading">
+        <div class="song-card animate-fade-in-up" *ngFor="let item of [1,2,3,4,5,6]">
+          <div class="card-icon">
+            <ion-skeleton-text animated style="width: 24px; height: 24px; border-radius: 50%;"></ion-skeleton-text>
+          </div>
+          <div class="card-content">
+            <h3><ion-skeleton-text animated style="width: 80%; height: 20px;"></ion-skeleton-text></h3>
+            <div class="card-footer">
+              <ion-skeleton-text animated style="width: 40%; height: 14px;"></ion-skeleton-text>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real Data -->
+      <div class="songs-grid" *ngIf="!isLoading">
         <div 
-          class="song-card animate-fade-in-up" 
+          class="song-card animate-fade-in-up hover-scale" 
           *ngFor="let song of filteredSongs; let i = index"
           [style.animation-delay]="i * 0.05 + 's'"
           (click)="openSongPage(song.id)">
@@ -45,7 +62,7 @@
       </div>
       
       <!-- Empty State -->
-      <div class="empty-state animate-fade-in-up" *ngIf="filteredSongs.length === 0">
+      <div class="empty-state animate-fade-in-up" *ngIf="!isLoading && filteredSongs.length === 0">
         <ion-icon name="musical-notes-outline"></ion-icon>
         <p>No se encontraron canciones</p>
       </div>

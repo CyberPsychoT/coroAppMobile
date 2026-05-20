@@ -13,5 +13,28 @@
         width: 90%;
         height: 180px;
     }
+}
 
+::ng-deep .lyric-line {
+    line-height: 2.5; /* Da espacio para el acorde arriba */
+    margin-bottom: 10px;
+}
+
+::ng-deep .chord-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    vertical-align: bottom;
+}
+
+::ng-deep .chord {
+    font-weight: bold;
+    color: #d97706; /* Un color para destacar el acorde */
+    font-size: 0.85em;
+    margin-bottom: -10px; /* Acerca el acorde a la letra */
+}
+
+::ng-deep .lyric {
+    font-size: 1em;
+    white-space: pre-wrap;
 }

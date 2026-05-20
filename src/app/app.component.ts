@@ -23,6 +23,7 @@ export class AppComponent {
     { title: 'Lista semanal', url: 'guess/list-week', icon: 'list' },
     { title: 'Configuración', url: 'guess/settings', icon: 'settings' },
   ];
+  public isDarkMode = false;
   constructor(
     private router: Router,
     private menu: MenuController,
@@ -32,6 +33,7 @@ export class AppComponent {
     private updateService: UpdateService
   ) {
     this.applyStoredConfigurations();
+    this.initializeDarkMode();
     this.updateService.checkForUpdates();
   }
 
@@ -76,6 +78,48 @@ export class AppComponent {
     // Apply large list text configuration for Tablet (2)
     if (this.configService.isLargeListTextTabletEnabled2()) {
       document.body.classList.add('large-list-text-tablet-2');
+    }
+  }
+
+  initializeDarkMode() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const savedTheme = this.configService.isDarkModeEnabled();
+
+    if (savedTheme !== null) {
+      this.isDarkMode = savedTheme;
+    } else {
+      this.isDarkMode = prefersDark.matches;
+    }
+    
+    this.applyTheme();
+
+    prefersDark.addEventListener('change', (mediaQuery) => {
+      // Solo cambiar si el usuario no ha forzado una preferencia manual
+      if (this.configService.isDarkModeEnabled() === null) {
+         this.isDarkMode = mediaQuery.matches;
+         this.applyTheme();
+      }
+    });
+  }
+
+  onDarkModeChange() {
+    this.configService.setDarkModeEnabled(this.isDarkMode);
+    this.applyTheme();
+  }
+
+  applyTheme() {
+    if (this.isDarkMode) {
+      document.documentElement.classList.add('ion-palette-dark');
+      document.body.classList.add('ion-palette-dark');
+      
+      document.documentElement.classList.remove('force-light-mode');
+      document.body.classList.remove('force-light-mode');
+    } else {
+      document.documentElement.classList.remove('ion-palette-dark');
+      document.body.classList.remove('ion-palette-dark');
+      
+      document.documentElement.classList.add('force-light-mode');
+      document.body.classList.add('force-light-mode');
     }
   }
 

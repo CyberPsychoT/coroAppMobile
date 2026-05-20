@@ -2,14 +2,33 @@
 
 <ion-content>
   <div class="contenido">
-    <ion-list lines="none" class="list-visualizer">
+    
+    <!-- Skeleton Loaders -->
+    <ion-list lines="none" class="list-visualizer" *ngIf="isLoading">
+      <ng-container *ngFor="let item of [1,2,3]">
+        <ion-item color="light" class="song-header">
+          <ion-skeleton-text animated style="width: 40%; height: 20px;"></ion-skeleton-text>
+        </ion-item>
+        <div>
+          <div class="song-item" style="padding: 10px 15px;">
+            <ion-skeleton-text animated style="width: 100%; height: 16px; margin-bottom: 8px;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 80%; height: 16px; margin-bottom: 8px;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 90%; height: 16px; margin-bottom: 8px;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 60%; height: 16px; margin-bottom: 8px;"></ion-skeleton-text>
+          </div>
+        </div>
+      </ng-container>
+    </ion-list>
+
+    <!-- Real Content -->
+    <ion-list lines="none" class="list-visualizer" *ngIf="!isLoading">
       <ng-container *ngFor="let section of sections">
         <ion-item
           color="light"
           button
           (click)="section.open = !section.open"
-          class="song-header">
-          <ion-label>{{ section.name }}</ion-label>
+          class="song-header animate-fade-in-up">
+          <ion-label class="ion-text-wrap">{{ section.name }}</ion-label>
           <ion-icon
             slot="end"
             name="chevron-down-outline"
@@ -19,10 +38,8 @@
             name="chevron-up-outline"
             *ngIf="section.open"></ion-icon>
         </ion-item>
-        <div *ngIf="section.open">
-          <p class="song-item" style="white-space: pre-wrap">
-            {{ section.content }}
-          </p>
+        <div *ngIf="section.open" class="animate-fade-in-down">
+          <div class="song-item" [innerHTML]="section.parsedContent"></div>
         </div>
       </ng-container>
     </ion-list>

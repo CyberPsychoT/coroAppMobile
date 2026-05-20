@@ -3,14 +3,15 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-toolbar class="header">
+          <div class="menu-header">
             <ion-avatar>
               <img
                 alt="Logo CoroApp"
-                src="../assets/icon/favicon.png" /> </ion-avatar><br />
-            <ion-title>CoroApp</ion-title><br />
-            <span>¡Bienvenido!</span>
-          </ion-toolbar>
+                src="../assets/icon/favicon.png" />
+            </ion-avatar>
+            <h2>CoroApp</h2>
+            <p>¡Bienvenido!</p>
+          </div>
 
           <ion-menu-toggle
             auto-hide="false"
@@ -29,6 +30,12 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          
+          <ion-item lines="none" class="update-item">
+            <ion-icon slot="start" ios="moon-outline" md="moon-sharp"></ion-icon>
+            <ion-label>Modo Oscuro</ion-label>
+            <ion-toggle slot="end" [(ngModel)]="isDarkMode" (ionChange)="onDarkModeChange()"></ion-toggle>
+          </ion-item>
           
           <ion-item lines="none" (click)="checkUpdate()" button detail="false" class="update-item">
             <ion-icon slot="start" ios="cloud-download-outline" md="cloud-download-sharp"></ion-icon>

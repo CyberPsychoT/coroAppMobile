@@ -1,3 +1,17 @@
 .contenido {
     margin: 0 10px;
 }
+
+/* Título del navbar sin truncado con "..." */
+.custom-title {
+    flex: 1;
+    color: var(--ion-color-primary-contrast, #ffffff);
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: normal;
+    word-break: break-word;
+    overflow: visible;
+    line-height: 1.3;
+    padding: 8px 0 8px 16px;
+    text-align: start;
+}
