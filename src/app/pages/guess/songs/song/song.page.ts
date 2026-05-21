@@ -99,13 +99,13 @@ export class SongPage implements OnInit {
   initializeSections() {
     if (this.song) {
       this.sections = [
-        { name: 'Introducción', content: this.song.introduction, parsedContent: this.parseChords(this.song.introduction), open: true },
-        { name: 'Letra y acordes', content: this.song.letter1, parsedContent: this.parseChords(this.song.letter1), open: true },
-        { name: 'Interludio', content: this.song.interlude, parsedContent: this.parseChords(this.song.interlude), open: true },
-        { name: 'Letra y acordes', content: this.song.letter2, parsedContent: this.parseChords(this.song.letter2), open: true },
-        { name: 'Final', content: this.song.end, parsedContent: this.parseChords(this.song.end), open: true },
-        { name: 'Etiqueta', content: this.song.label, parsedContent: this.parseChords(this.song.label), open: false },
-        { name: 'Vídeo', content: '', parsedContent: null, open: false }, // Placeholder
+        { name: 'Introducción',    content: this.song.introduction, parsedContent: this.parseChords(this.song.introduction), open: !!this.song.introduction?.trim() },
+        { name: 'Letra y acordes', content: this.song.letter1,      parsedContent: this.parseChords(this.song.letter1),      open: !!this.song.letter1?.trim() },
+        { name: 'Interludio',      content: this.song.interlude,    parsedContent: this.parseChords(this.song.interlude),    open: !!this.song.interlude?.trim() },
+        { name: 'Letra y acordes', content: this.song.letter2,      parsedContent: this.parseChords(this.song.letter2),      open: !!this.song.letter2?.trim() },
+        { name: 'Final',           content: this.song.end,          parsedContent: this.parseChords(this.song.end),          open: !!this.song.end?.trim() },
+        { name: 'Etiqueta',        content: this.song.label,        parsedContent: this.parseChords(this.song.label),        open: false },
+        { name: 'Vídeo',           content: '',                     parsedContent: null,                                     open: false },
       ];
     }
   }

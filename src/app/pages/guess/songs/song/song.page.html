@@ -27,18 +27,19 @@
           color="light"
           button
           (click)="section.open = !section.open"
-          class="song-header animate-fade-in-up">
+          class="song-header animate-fade-in-up"
+          [class.has-content]="section.content?.trim()"
+          [class.no-content]="!section.content?.trim()">
           <ion-label class="ion-text-wrap">{{ section.name }}</ion-label>
           <ion-icon
             slot="end"
             name="chevron-down-outline"
-            *ngIf="!section.open"></ion-icon>
-          <ion-icon
-            slot="end"
-            name="chevron-up-outline"
-            *ngIf="section.open"></ion-icon>
+            class="section-chevron"
+            [class.open]="section.open"
+            [class.pulse-icon]="!section.content?.trim()">
+          </ion-icon>
         </ion-item>
-        <div *ngIf="section.open" class="animate-fade-in-down">
+        <div class="section-body" [class.open]="section.open">
           <div class="song-item" [innerHTML]="section.parsedContent"></div>
         </div>
       </ng-container>
