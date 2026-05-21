@@ -15,9 +15,13 @@
     }
 }
 
+::ng-deep .song-item {
+    padding: 12px 16px;
+}
+
 ::ng-deep .lyric-line {
-    line-height: 1.8; /* Espacio justo para el acorde arriba */
-    margin-bottom: 2px;
+    line-height: 1.4; /* Espacio justo para el acorde arriba */
+    margin-bottom: 0px;
 }
 
 ::ng-deep .chord-wrapper {
@@ -31,12 +35,12 @@
     font-weight: bold;
     color: #d97706; /* Un color para destacar el acorde */
     font-size: 0.82em;
-    line-height: 1.2;
-    margin-bottom: 1px;
+    line-height: 1.1;
+    margin-bottom: 0px;
 }
 
 ::ng-deep .lyric {
     font-size: 1em;
     white-space: pre-wrap;
-    line-height: 1.4;
+    line-height: 1.2;
 }
