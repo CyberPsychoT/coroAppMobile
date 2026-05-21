@@ -16,8 +16,8 @@
 }
 
 ::ng-deep .lyric-line {
-    line-height: 2.5; /* Da espacio para el acorde arriba */
-    margin-bottom: 10px;
+    line-height: 1.8; /* Espacio justo para el acorde arriba */
+    margin-bottom: 2px;
 }
 
 ::ng-deep .chord-wrapper {
@@ -30,11 +30,13 @@
 ::ng-deep .chord {
     font-weight: bold;
     color: #d97706; /* Un color para destacar el acorde */
-    font-size: 0.85em;
-    margin-bottom: -10px; /* Acerca el acorde a la letra */
+    font-size: 0.82em;
+    line-height: 1.2;
+    margin-bottom: 1px;
 }
 
 ::ng-deep .lyric {
     font-size: 1em;
     white-space: pre-wrap;
+    line-height: 1.4;
 }
